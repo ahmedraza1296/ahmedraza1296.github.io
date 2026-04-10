@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Did It!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    h1 {
+      font-size: 6rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #f9d423, #ff4e50, #fc67fa, #43e8d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      line-height: 1.1;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 20px;
+      opacity: 0.9;
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 400;
+      color: #a0e4ff;
+      margin-top: 16px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.04); }
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle var(--d) ease-in-out infinite;
+      top: var(--y);
+      left: var(--x);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50%       { opacity: 1; transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+    <h1>You Did It!</h1>
+    <h2>Ahmed Raza</h2>
+    <h3>Keep Going</h3>
+  </div>
+
+  <script>
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.setProperty('--x', Math.random() * 100 + 'vw');
+      star.style.setProperty('--y', Math.random() * 100 + 'vh');
+      star.style.setProperty('--d', (Math.random() * 3 + 1.5) + 's');
+      star.style.animationDelay = (Math.random() * 4) + 's';
+      container.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>

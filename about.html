@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed Raza — About</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #0a0f1e 0%, #1a1a2e 50%, #16213e 100%);
+      background-attachment: fixed;
+      color: #e2e8f0;
+    }
+
+    /* ── Ambient glow orbs in the background ── */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 500px;
+      height: 500px;
+      background: rgba(56, 189, 248, 0.08);
+      top: -100px;
+      left: -100px;
+    }
+
+    body::after {
+      width: 400px;
+      height: 400px;
+      background: rgba(99, 102, 241, 0.07);
+      bottom: -80px;
+      right: -80px;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(10, 15, 30, 0.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #38bdf8;
+    }
+
+    /* ── Header ── */
+    header {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 140px 24px 60px;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-shadow:
+        0 0 30px rgba(56, 189, 248, 0.5),
+        0 0 60px rgba(56, 189, 248, 0.2);
+    }
+
+    header p {
+      margin-top: 14px;
+      font-size: 1.05rem;
+      color: #94a3b8;
+      letter-spacing: 1px;
+    }
+
+    /* Glowing accent line under header */
+    .accent-line {
+      width: 80px;
+      height: 3px;
+      margin: 28px auto 0;
+      background: linear-gradient(90deg, transparent, #38bdf8, #818cf8, transparent);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+    }
+
+    /* ── Main content ── */
+    main {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 24px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ── Glass card base style ── */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 40px 40px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── Section headings ── */
+    .glass-card h2 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #38bdf8;
+      margin-bottom: 24px;
+    }
+
+    /* ── Bio section ── */
+    .bio-section p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #cbd5e1;
+      margin-bottom: 18px;
+    }
+
+    .bio-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Skills section ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: #7dd3fc;
+      letter-spacing: 0.3px;
+      cursor: default;
+      transition: background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+
+    .skill-badge:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: rgba(56, 189, 248, 0.6);
+      color: #e0f2fe;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+
+    /* ── Contact section ── */
+    .contact-section {
+      text-align: center;
+    }
+
+    .contact-section a {
+      display: inline-block;
+      font-size: 1.05rem;
+      color: #38bdf8;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.35);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s, text-shadow 0.2s;
+    }
+
+    .contact-section a:hover {
+      color: #e0f2fe;
+      border-color: #e0f2fe;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: #475569;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.6rem;
+      }
+
+      header p {
+        font-size: 0.95rem;
+      }
+
+      .glass-card {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav>
+    <a class="nav-name" href="index.html">Ahmed Raza</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Ahmed Raza</h1>
+    <p>E-Commerce Operations Manager &amp; AI-Assisted Developer in Progress</p>
+    <div class="accent-line"></div>
+  </header>
+
+  <main>
+
+    <section class="glass-card bio-section">
+      <h2>About Me</h2>
+      <p>
+        With a background in Industrial Engineering and years spent optimizing operations
+        in manufacturing and Amazon FBA across supply chains, Ahmed Raza has always been
+        driven by one question: how do I make this work better?
+      </p>
+      <p>
+        That same mindset now fuels his journey into AI-powered development. Ahmed is
+        currently building real tools and projects using Claude Code, not just to explore
+        AI, but to engineer practical solutions to real problems.
+      </p>
+      <p>
+        His operations background gives him a unique edge: he doesn't just build for the
+        sake of building, he builds to solve.
+      </p>
+    </section>
+
+    <section class="glass-card">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <span class="skill-badge">Amazon FBA Management</span>
+        <span class="skill-badge">Supply Chain Operations</span>
+        <span class="skill-badge">Claude Code</span>
+        <span class="skill-badge">AI-Powered Development</span>
+        <span class="skill-badge">Generative AI Applications</span>
+      </div>
+    </section>
+
+    <section class="glass-card contact-section">
+      <h2>Get in Touch</h2>
+      <a href="mailto:ahmedraza.bhangda@gmail.com">ahmedraza.bhangda@gmail.com</a>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 Ahmed Raza
+  </footer>
+
+</body>
+</html>
